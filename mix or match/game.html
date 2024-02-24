@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MIX OR MATCH</title>
+    <!-- icon -->
+    <link rel="icon" type="image/x-icon" href="./assests/img/ghost-face.png">
+    <link rel="stylesheet" href="./game.css">
+    <!-- bootstrap icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+</head>
+
+<body>
+    <h1 id="mix-match-title">mix or match</h1>
+    <!-- visible class is comment herre after over-page -->
+    <div class="over-page visible" id="start-game">
+        Click to Start
+    </div>
+    <div id="game-over" class="over-page">
+        Bots plays better than you
+        <span class="restart">Click to Restart</span>
+        <button class="flex-button">Leaderboard</button>
+    </div>
+    <div id="winer" class="over-page">
+        winner&#128293;
+        <!-- <span class="restart">Click to Restart</span> -->
+        <button class="flex-button">Leaderboard</button>
+    </div>
+    <!-- main div that contains time, flip & cards -->
+    <div class="container">
+        <div class="time-flip">
+            <div class="info">
+                Time <span id="timer">60</span>
+            </div>
+            <div class="info">
+                Flip <span id="flip">0</span>
+            </div>
+            <div class="again-btn">
+                <button id="btn-home" class="action-btn">Home</button>
+            </div>
+        </div>
+        <div id="all-cards">
+            <!-- add 16 cards here -->
+        </div>
+    </div>
+
+    <script src="./JS/game.js" type="module"></script>
+</body>
+
+</html>

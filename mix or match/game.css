@@ -1,0 +1,380 @@
+/* two fonts that use in this game */
+/* this one use for overlays */
+@font-face {
+  font-family: "Exquisite Corpse";
+  src: url("./assests/fonts/exquisite-corpse/Exquisite\ Corpse.ttf")
+      format("truetype"),
+    url("exquisite-corpse.woff") format("woff");
+}
+/* this is for main fonts */
+@font-face {
+  font-family: "Singly Linked";
+  src: url("./assests/fonts/Singly-Linked/Singly\ Linked.ttf")
+      format("truetype"),
+    url("exquisite-corpse.woff") format("woff");
+}
+/* main page style */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+/* page that we can see with 100 view height */
+body {
+  height: 100vh;
+  cursor: url("./assests/img/cursor.png"), auto;
+  background-image: url(./assests/img/back.jpg);
+}
+/* color variables that use in this game */
+:root {
+  --redColor: rgb(255, 0, 0);
+  --orangeTimeFlip: #e9995f;
+  --black: #000;
+  --cardColor: rgb(173, 216, 230);
+  --blueHeader: #2411ce;
+  --overpage: #770404;
+}
+/* container that all elements are in css class */
+.container {
+  display: grid;
+  justify-content: center;
+  perspective: 500px;
+}
+/* div that add all 16 cards in js to this ID */
+#all-cards {
+  display: grid;
+  grid-template-columns: repeat(8, auto);
+  grid-gap: 10px;
+  justify-content: center;
+}
+/* class for flip  and time*/
+.time-flip {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 5px;
+  grid-column: 1 / -1;
+}
+/* hearder of this game */
+#mix-match-title {
+  font-family: "Singly Linked", "Times New Roman", Times, serif;
+  font-size: 6rem;
+  text-align: center;
+  font-weight: normal;
+  color: var(--redColor);
+}
+/* class for time and flip that are in time-flip */
+.info {
+  color: var(--redColor);
+  font-size: 2rem;
+  font-family: Singly Linked;
+}
+/* this button for reset a game */
+.action-btn {
+  padding: 6px 12px;
+  border: none;
+  border-radius: 4px;
+  color: var(--black);
+  font-family: Singly Linked;
+  background-color: lightblue;
+}
+/* btn-again when hover */
+.action-btn:hover {
+  background-color: var(--orangeTimeFlip);
+  cursor: url("./assests/img/cursor.png"), auto;
+}
+/* card class that contains card-front, card-back and card-face */
+.card {
+  height: 200px;
+  width: 150px;
+  position: relative;
+  border-radius: 4px;
+}
+/* face of all cards(back & front) of each card */
+.card-face {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  border-radius: 4px;
+  border: none;
+  backface-visibility: hidden;
+  cursor: pointer;
+  transition: transform 500ms ease-in-out;
+}
+/* rotate when we see ghost img(rotate to see front of each card) */
+.card.visible .card-back {
+  transform: rotateY(-180deg);
+}
+/* rotate when we see random img(rotate to see back of each cards (ghost img)) */
+.card.visible .card-front {
+  transform: rotateY(0);
+}
+/* contains color of background & border when we see ghost img */
+.card-back {
+  background-color: var(--cardColor);
+  cursor: url("./assests/img/cursor.png"), auto;
+}
+/* contains color of background & border and rotate when we see each random img */
+.card-front {
+  transform: rotatey(180deg);
+  background-color: var(--orangeTimeFlip);
+  cursor: url("./assests/img/cursor.png"), auto;
+  /* border-color: var(--black); */
+}
+/* value here means each random img */
+.card-value {
+  width: 100px;
+  /* transition: transform 700ms ease-in-out; */
+  scale: 0.9;
+}
+/* increase size of each random img */
+.card-front:hover .card-value {
+  scale: 1;
+}
+/* add animation for when 2 cards are same img */
+.card.matched .card-value {
+  animation: move 1s infinite linear 500ms;
+}
+/* animation for when both cards are same image */
+@keyframes move {
+  0%,
+  100% {
+    transform: rotate(0);
+  }
+  25% {
+    transform: rotate(15deg);
+  }
+  75% {
+    transform: rotate(-15deg);
+  }
+}
+/* img that use in each corner of cards */
+.corner {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  transition: width 100ms ease-in-out, height 100ms ease-in-out;
+}
+/* increase width of this img */
+.card-face:hover .corner {
+  width: 50px;
+  height: 50px;
+}
+/* top left corner */
+.corner-top-left {
+  top: 0;
+  left: 0;
+  transform: rotate(90deg);
+}
+/*  top right corner */
+.corner-top-right {
+  transform: rotate(180deg);
+  top: 0;
+  right: 0;
+}
+/* bottom left corner */
+.corner-bottom-left {
+  bottom: 0;
+  left: 0;
+  transform: rotate(0deg);
+}
+/* bottom right corner */
+.corner-bottom-right {
+  bottom: 0;
+  right: 0;
+  transform: rotate(270deg);
+}
+/* image that use on back of all cards */
+.ghost {
+  align-self: flex-start;
+  transform: translateY(50px);
+  transition: transform 320ms ease-in;
+  width: 100px;
+}
+/* when hover on back of each cards, the image go up 35px from begining */
+.card-back:hover .ghost {
+  transform: translateY(35px);
+}
+/* overlays */
+.over-page {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  justify-content: center;
+  align-items: center;
+  z-index: 1;
+  color: var(--overpage);
+  font-family: Exquisite Corpse, serif;
+  display: none;
+}
+/* when overlays are visible */
+.over-page.visible {
+  animation: overpage 400ms forwards;
+  cursor: pointer;
+  flex-direction: column;
+  display: flex;
+  cursor: url("./assests/img/ghost-face-cursor.png"), auto;
+}
+
+/* for restart page */
+.restart {
+  font-size: 2rem;
+}
+/* score page */
+.flex-button {
+  padding: 6px 12px;
+  margin-top: 10px;
+  color: #770404;
+  cursor: url("./assests/img/ghost-face-cursor.png"), auto;
+  border-radius: 8px;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: end;
+}
+/* this animation for overlays when we are go to the game page or win or lose game */
+@keyframes overpage {
+  from {
+    background-color: rgba(0, 0, 0, 0);
+    font-size: 0;
+  }
+  to {
+    font-size: 6em;
+    background-color: rgba(0, 0, 0, 0.8);
+  }
+}
+
+/* start media queries */
+
+/* 1 */
+@media (max-width: 1300px) {
+  .container,
+  #all-cards {
+    grid-template-columns: repeat(8, auto);
+  }
+  .card {
+    width: 130px;
+    height: 180px;
+  }
+  @keyframes overpage {
+    from {
+      background-color: rgba(0, 0, 0, 0);
+      font-size: 0;
+    }
+    to {
+      font-size: 5em;
+      background-color: rgba(0, 0, 0, 0.8);
+    }
+  }
+}
+/* 2 */
+@media (max-width: 1124px) {
+  .container,
+  #all-cards {
+    grid-template-columns: repeat(8, auto);
+  }
+  .card {
+    width: 120px;
+    height: 170px;
+  }
+  @keyframes overpage {
+    from {
+      background-color: rgba(0, 0, 0, 0);
+      font-size: 0;
+    }
+    to {
+      font-size: 4.8em;
+      background-color: rgba(0, 0, 0, 0.8);
+    }
+  }
+}
+/* 3 */
+@media (max-width: 1040px) {
+  .container,
+  #all-cards {
+    grid-template-columns: repeat(4, auto);
+  }
+  .card {
+    height: 200px;
+    width: 150px;
+  }
+  @keyframes overpage {
+    from {
+      background-color: rgba(0, 0, 0, 0);
+      font-size: 0;
+    }
+    to {
+      font-size: 3em;
+      background-color: rgba(0, 0, 0, 0.8);
+    }
+  }
+}
+/* 4 */
+@media (max-width: 660px) {
+  .container,
+  #all-cards {
+    grid-template-columns: repeat(4, auto);
+  }
+  .time-flip {
+    flex-direction: column;
+    align-items: center;
+  }
+  .card {
+    width: 130px;
+    height: 180px;
+  }
+  #mix-match-title {
+    font-size: 5rem;
+  }
+  @keyframes overpage {
+    from {
+      background-color: rgba(0, 0, 0, 0);
+      font-size: 0;
+    }
+    to {
+      font-size: 2.5em;
+      background-color: rgba(0, 0, 0, 0.8);
+    }
+  }
+}
+/* 5 */
+@media (max-width: 578px) {
+  .container,
+  #all-cards {
+    grid-template-columns: repeat(2, auto);
+  }
+  .time-flip {
+    flex-direction: column;
+    align-items: center;
+  }
+  #mix-match-title {
+    font-size: 2rem;
+  }
+  .info {
+    font-size: 1rem;
+  }
+  @keyframes overpage {
+    from {
+      background-color: rgba(0, 0, 0, 0);
+      font-size: 0;
+    }
+    to {
+      font-size: 2em;
+      background-color: rgba(0, 0, 0, 0.8);
+    }
+  }
+  .card {
+    width: 130px;
+    height: 180px;
+  }
+  .ghost {
+    transform: translateY(40px);
+    width: 80px;
+  }
+}

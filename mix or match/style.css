@@ -1,0 +1,182 @@
+*{ margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+/* color variables that use in this game */
+:root {
+    --borderColor:#c6c3c3;
+    --white:#ffffff;
+    --black:#000;
+    --iconRed: #c71c1c
+  }
+/* scores font */
+@font-face {
+    font-family: 'beautiful_barbies'; 
+    src: url('./assests/fonts/beautiful_barbies/Beautiful\ Barbies.otf') format('truetype'),
+    url('exquisite-corpse.woff') format('woff');
+}
+/* style of body */
+body{
+        background-image: url("img/back.jpg");
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center;
+        background-attachment: fixed;
+        cursor: url("./assests/img/1.png"), auto;
+}
+
+div.container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    min-height: 100vh;
+    background-color: rgba(0, 0, 0, 0.2);
+}
+/* main div */
+div.main-box{
+    position: relative;
+    width: 450px;
+    backdrop-filter: blur(25px);
+    border: 2px solid var(--borderColor);
+    box-shadow: 0px 0px 10px 2px rgba(0, 0, 0, 0.2);
+    border-radius: 15px;
+    padding: 6.5em 2.5em 4em 2.5em;
+    color: var(--white);
+}
+/* small div inside main div for header */
+div.header-box{
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #c6c3c3;
+    width: 140px;
+    height: 70px;
+    border-radius: 0 0 20px 20px;
+}
+/* before header div */
+.header-box::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -30px;
+    width: 30px;
+    height: 30px;
+    border-top-right-radius: 50%;
+    background: transparent;
+    box-shadow: 15px 0 0 0 #c6c3c3;
+}
+/* after header div */
+.header-box::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: -30px;
+    width: 30px;
+    height: 30px;
+    border-top-left-radius: 50%;
+    background: transparent;
+    box-shadow: -15px 0 0 0 #c6c3c3;
+}
+/* text on header div */
+div.header-box span{
+    font-size: 30px;
+    color: #000;
+    font-family: beautiful_barbies, 'Times New Roman';
+}
+/* input and button */
+div.enter-name{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+/* input type text */
+#text{
+    width: 260px;
+    padding: 10px 12px;
+    border-radius: 6px;
+    outline: none;
+    border-color: rgb(167, 167, 173);
+    border-style: solid; 
+}
+/* button style */
+#start{
+    padding: 8px 8px;
+    color:var(--black);
+    border-radius: 4px;
+    border: none;
+    text-transform: capitalize;
+    cursor: url("./assests/img/cursor.png"), auto;
+}
+/* button when hover */
+#start:hover{
+    background-color: aliceblue;
+    scale: 1.1;
+}
+/* divs that create for each player in js */
+div.add-score{
+    color: var(--white);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border: 2px solid rgb(196, 200, 204);
+    border-radius: 6px;
+    padding: 6px 10px;
+    margin-top: 20px;
+    cursor: url("./assests/img/cursor.png"), auto;
+    
+}
+/* number icon */
+span.icon{
+    font-size: 25px;
+    font-weight: 500;
+    color: var(--iconRed);
+}
+/*  hover divs that create for each player in js */
+div.add-score:hover{
+    scale: 1.03;
+    .scores{
+        color:var(--white);
+    }
+    .icon{
+        color: var(--white);
+    }
+    .name{
+        color: var(--iconRed);
+    }
+}
+/* each player name */
+span.name{
+    text-transform: uppercase;
+    font-family:'Times New Roman', Times, serif;
+    
+}
+/* avatar for each player that add in js file */
+.avatar-name{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+}
+/* scores style */
+.scores{
+    color: var(--iconRed);
+    font-size:20px ;
+}
+/* start media */
+@media (max-width:500px){
+    #text{
+        width: 200px;
+        padding: 10px 12px;
+        border-radius: 6px;
+        outline: none;
+        border-color: rgb(167, 167, 173);
+        border-style: solid; 
+    } 
+}
